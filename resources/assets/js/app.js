@@ -7,8 +7,11 @@
 
 require('./bootstrap');
 
-import Vue from 'vue';
-import router from './router';
+import Vue from 'vue'
+
+import router from './router'
+import http from './services/http.js'
+import userStore from './stores/userStore'
 
 window.Vue = require('vue');
 
@@ -23,5 +26,9 @@ window.Vue = require('vue');
 const app = new Vue({
     router,
     el: '#app',
-    render: h => h(require('./App.vue')),
+    created () {
+        http.init()
+        userStore.init()
+    },
+    render: h => h(require('./components/layouts/app.vue')),
 });
